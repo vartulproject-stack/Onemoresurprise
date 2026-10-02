@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Purnima ❤️</title>
+  <!-- Canvas Confetti Library for Fireworks & Petals -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      padding: 25px 20px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 2;
+    }
+    .layer {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
+    .layer.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      font-size: 1.6rem;
+      color: #ff416c;
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px rgba(255, 65, 108, 0.3);
+    }
+    p {
+      font-size: 0.98rem;
+      line-height: 1.5;
+      color: #e0e0e0;
+      margin-bottom: 18px;
+    }
+    .media-element {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin: 10px 0 18px 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .btn {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+      margin: 6px;
+      display: inline-block;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 65, 108, 0.6);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: none;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      min-height: 50px;
+    }
+    .glow-btn {
+      box-shadow: 0 0 20px rgba(255, 65, 108, 0.8) !important;
+      animation: glowPulse 1.2s infinite alternate;
+    }
+    @keyframes glowPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+    /* Heartbeat Scanner */
+    .heart-scanner {
+      margin: 20px 0;
+      cursor: pointer;
+    }
+    .heart-icon {
+      font-size: 4rem;
+      user-select: none;
+      animation: pulse 1.2s infinite alternate;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4b2b); }
+      100% { transform: scale(1.25); filter: drop-shadow(0 0 20px #ff4b2b); }
+    }
+    /* Secret Note */
+    .secret-note {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px dashed #ff416c;
+      padding: 15px;
+      border-radius: 12px;
+      font-style: italic;
+      color: #ffeaa7;
+      margin-top: 15px;
+    }
+    /* Progress Bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      transition: width 0.3s ease;
+    }
+    .yes-btn {
+      background: linear-gradient(45deg, #11998e, #38ef7d) !important;
+    }
+    .no-btn {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .badge-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    /* Layer 12 Typewriter Box */
+    .typewriter-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px dashed #ff416c;
+      border-radius: 15px;
+      padding: 25px 15px;
+      margin: 20px 0;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(255, 65, 108, 0.3);
+    }
+    .typewriter-content {
+      font-size: 1.25rem !important;
+      font-weight: 700;
+      color: #ffeaa7 !important;
+      line-height: 1.8;
+      margin-bottom: 0 !important;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px rgba(255, 65, 108, 0.6);
+    }
+    .word-span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(10px) scale(0.8);
+      animation: popInWord 0.4s ease forwards;
+      margin: 0 4px;
+    }
+    @keyframes popInWord {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- LAYER 1 -->
+  <div class="layer active" id="layer-1">
+    <h2>Purnima ✨</h2>
+    <img src="p1.gif" alt="Welcome" class="media-element">
+    <p>Humne aapke liye ek choti si interactive journey banayi hai... Kya aap taiyar hain?</p>
+    <button class="btn" onclick="nextLayer(2)">Start Journey 🚀</button>
+  </div>
+
+  <!-- LAYER 2 -->
+  <div class="layer" id="layer-2">
+    <h2>Security Check 🛑</h2>
+    <img src="p2.jpeg" alt="Security" class="media-element">
+    <p>Aage jaane ke liye ek shart hai: Poore time aapke face par pyaari si smile rehni chahiye! 😊</p>
+    <button class="btn" onclick="nextLayer(3)">Shart Manzoor Hai! 😉</button>
+    <button class="btn btn-secondary" onclick="alert('Gussa rehna bilkul allowed nahi hai! 😂')">Gussa Rahungi 😜</button>
+  </div>
+
+  <!-- LAYER 3 -->
+  <div class="layer" id="layer-3">
+    <h2>Mood Check 🌙</h2>
+    <img src="p3.gif" alt="Mood Check" class="media-element">
+    <p>Sahi sahi batayiye, aapka favourite relaxation mode kya hota hai?</p>
+    <button class="btn" onclick="nextLayer(4)">Late Night Conversations 💬</button>
+    <button class="btn" onclick="nextLayer(4)">Music & Chill 🎧</button>
+  </div>
+
+  <!-- LAYER 4 -->
+  <div class="layer" id="layer-4">
+    <h2>A Quick Confession... ✨</h2>
+    <div class="badge-icon">💖</div>
+    <p>Hum real life me abhi tak mile nahi hain, lekin aapki smile dekh kar humara mood hamesha 100x better ho jata hai! 🌸</p>
+    <button class="btn" id="l4-btn" onclick="triggerHearts()">Send Hearts ❤️</button>
+    <button class="btn btn-secondary" id="l4-next" style="display:none;" onclick="nextLayer(5)">Next Layer Unlock 🚀</button>
+  </div>
+
+  <!-- LAYER 5 -->
+  <div class="layer" id="layer-5">
+    <h2>A Little Secret... 💖</h2>
+    <img src="p5.jpeg" alt="Confession" class="media-element">
+    <p style="font-style: italic; color: #ffeaa7;">
+      "Purnima, bhale hi hum abhi tak real life me mile nahi hain, lekin pata nahi kab aur kaise, aap humare liye bohot zaroori ho gayi hain... ❤️"
+    </p>
+    <button class="btn" onclick="nextLayer(6)">Aage Chalo 🥹✨</button>
+  </div>
+
+  <!-- LAYER 6 -->
+  <div class="layer" id="layer-6">
+    <h2>Feelings Detector 💓</h2>
+    <p>Neeche heart icon par apni finger rakhein aur scan karein...</p>
+    <div class="heart-scanner" onclick="startHeartScan()">
+      <div class="heart-icon" id="heart-btn">❤️</div>
+    </div>
+    <p id="scan-status" style="font-size: 0.9rem;">Tap the heart to start scan...</p>
+    <button class="btn" id="l6-next" style="display:none;" onclick="nextLayer(7)">See Results ➡️</button>
+  </div>
+
+  <!-- LAYER 7 -->
+  <div class="layer" id="layer-7">
+    <h2>Secret Note Unlocked 💌</h2>
+    <div onclick="openEnvelope()" style="cursor:pointer;">
+      <img src="p7.png" alt="Envelope" class="media-element">
+      <p id="env-hint" style="font-size:0.85rem; color:#ff416c;">(Tap to open note)</p>
+    </div>
+    <div class="secret-note" id="secret-note" style="display:none;">
+      <p>"Texting you is super sweet, lekin hum imagine karte rehte hain ki aapki real laugh in person me kitni cute lagti hogi... ✨"</p>
+    </div>
+    <button class="btn" id="l7-next" style="display:none; margin-top:15px;" onclick="nextLayer(8)">Aage Chalo 🚀</button>
+  </div>
+
+  <!-- LAYER 8 -->
+  <div class="layer" id="layer-8">
+    <h2>Wait a moment, Purnima... ⏳</h2>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="l8-progress"></div>
+    </div>
+    <p id="l8-status" style="font-size:0.9rem; color:#ffeaa7;">Gathering courage... [0%]</p>
+    <button class="btn" id="l8-next" style="display:none; margin-top:10px;" onclick="nextLayer(9)">UNLOCK FINAL TRUTH 🔐</button>
+  </div>
+
+  <!-- LAYER 9 -->
+  <div class="layer" id="layer-9">
+    <h2>The Main Question ✨</h2>
+    <img src="p9.jpeg" alt="Proposal" class="media-element">
+    <p><b>Purnima, kya hum jaldi hi real life me mil sakte hain?</b></p>
+    <div class="btn-container">
+      <button class="btn yes-btn" onclick="acceptProposal()">YES! Bilkul! 💖</button>
+      <button class="btn btn-secondary no-btn" id="no-btn" onmouseover="dodgeButton()" onclick="dodgeButton()">No 😜</button>
+    </div>
+  </div>
+
+  <!-- LAYER 10 -->
+  <div class="layer" id="layer-10">
+    <h2>It's Settled! 🎉❤️</h2>
+    <div class="badge-icon">🥳</div>
+    <p><b>Woohoo! Best decision ever!</b><br>Hum aap se milne aur aapki smile real me dekhne ke liye bohot excited hain!</p>
+    <button class="btn" onclick="nextLayer(11)">One Last Thing... 🙈✨</button>
+  </div>
+
+  <!-- LAYER 11 -->
+  <div class="layer" id="layer-11">
+    <h2 style="font-size: 2.2rem;">Forever Yours 🫂💗</h2>
+    <img src="p11.jpeg" alt="Forever" class="media-element">
+    <p style="color: #ffeaa7; font-weight: 600;">
+      "Ab chahe jo ho jaye, hum hamesha aapke saath hain... ✨<br>Thank you for being in my life, Purnima! ❤️"
+    </p>
+    <button class="btn glow-btn" onclick="nextLayer(12)">Some lines for you... 💌✨</button>
+  </div>
+
+  <!-- LAYER 12 -->
+  <div class="layer" id="layer-12">
+    <div class="badge-icon">🎵🌸</div>
+    <h2>Just For You Purnima ❤️</h2>
+    <div class="typewriter-box">
+      <p id="typewriter-text" class="typewriter-content"></p>
+    </div>
+    <button class="btn" id="l12-replay" style="display:none; margin-top: 10px;" onclick="location.reload()">Replay Journey 🔄</button>
+  </div>
+
+</div>
+
+<script>
+  let flowerRainInterval = null;
+
+  function nextLayer(layerNum) {
+    document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
+    document.getElementById(`layer-${layerNum}`).classList.add('active');
+    
+    if(layerNum === 8) {
+      startLoadingBar();
+    }
+    
+    if(layerNum === 12) {
+      startWordByWordAnimation();
+    } else {
+      if(flowerRainInterval) clearInterval(flowerRainInterval);
+    }
+  }
+
+  function triggerHearts() {
+    confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+    document.getElementById('l4-btn').style.display = 'none';
+    document.getElementById('l4-next').style.display = 'inline-block';
+  }
+
+  function startHeartScan() {
+    const heart = document.getElementById('heart-btn');
+    const status = document.getElementById('scan-status');
+    heart.style.animation = "pulse 0.4s infinite alternate";
+    status.innerText = "Scanning heartbeat & blush levels...";
+    
+    setTimeout(() => {
+      heart.style.animation = "pulse 1.2s infinite alternate";
+      status.innerHTML = "<b style='color:#38ef7d;'>Scan Complete!</b><br>Result: High levels of blush detected! 🙈❤️";
+      document.getElementById('l6-next').style.display = 'inline-block';
+    }, 2200);
+  }
+
+  function openEnvelope() {
+    document.getElementById('env-hint').style.display = 'none';
+    document.getElementById('secret-note').style.display = 'block';
+    document.getElementById('l7-next').style.display = 'inline-block';
+    confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 }, colors: ['#ff416c', '#ffffff'] });
+  }
+
+  function startLoadingBar() {
+    let bar = document.getElementById('l8-progress');
+    let status = document.getElementById('l8-status');
+    let w = 0;
+    let interval = setInterval(() => {
+      if(w >= 100) {
+        clearInterval(interval);
+        status.innerHTML = "<b style='color:#38ef7d;'>Ready to reveal the final truth! ❤️</b>";
+        document.getElementById('l8-next').style.display = 'inline-block';
+      } else {
+        w += 10;
+        bar.style.width = w + '%';
+        status.innerText = `Gathering maximum courage... [${w}%]`;
+      }
+    }, 200);
+  }
+
+  function dodgeButton() {
+    const btn = document.getElementById('no-btn');
+    const x = Math.floor(Math.random() * 160) - 80;
+    const y = Math.floor(Math.random() * 80) - 40;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+
+  function acceptProposal() {
+    var count = 200;
+    var defaults = { origin: { y: 0.7 } };
+    function fire(particleRatio, opts) {
+      confetti(Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio)
+      }));
+    }
+    fire(0.25, { spread: 26, startVelocity: 55 });
+    fire(0.2, { spread: 60 });
+    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+    
+    setTimeout(() => { nextLayer(10); }, 1000);
+  }
+
+  // Layer 12: Flower Petals Rain & Word-by-Word Typewriter
+  function startWordByWordAnimation() {
+    const textContainer = document.getElementById('typewriter-text');
+    const replayBtn = document.getElementById('l12-replay');
+    textContainer.innerHTML = '';
+    replayBtn.style.display = 'none';
+
+    // Start Soft Flower Petals Shower
+    flowerRainInterval = setInterval(() => {
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0 },
+        colors: ['#ff758c', '#ff7eb3', '#ff416c', '#ffffff'],
+        scalar: 1.2,
+        drift: 0.5,
+        ticks: 300
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0 },
+        colors: ['#ff758c', '#ff7eb3', '#ff416c', '#ffffff'],
+        scalar: 1.2,
+        drift: -0.5,
+        ticks: 300
+      });
+    }, 450);
+
+    const fullSentence = "TUM HI HO TUM HI HO MERI ZINDAGI AB TUM HI HO💗";
+    const words = fullSentence.split(" ");
+    
+    words.forEach((word, index) => {
+      setTimeout(() => {
+        const span = document.createElement('span');
+        span.className = 'word-span';
+        span.innerText = word;
+        textContainer.appendChild(span);
+
+        if(index === words.length - 1) {
+          setTimeout(() => {
+            replayBtn.style.display = 'inline-block';
+          }, 1000);
+        }
+      }, index * 450);
+    });
+  }
+</script>
+
+</body>
+</html>
