@@ -24,6 +24,26 @@
       overflow-x: hidden;
       position: relative;
     }
+    /* Music Control Button */
+    .music-control {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
     .card {
       background: rgba(255, 255, 255, 0.07);
       backdrop-filter: blur(15px);
@@ -195,14 +215,19 @@
 </head>
 <body>
 
+<!-- Background Audio Tag -->
+<audio id="bg-music" src="u.mp3" loop></audio>
+
 <div class="card">
+  <!-- Music Control Button -->
+  <div class="music-control" id="music-btn" onclick="toggleMusic()" title="Toggle Music">🎵</div>
 
   <!-- LAYER 1 -->
   <div class="layer active" id="layer-1">
     <h2>Purnima ✨</h2>
     <img src="p1.gif" alt="Welcome" class="media-element">
     <p>Humne aapke liye ek choti si interactive journey banayi hai... Kya aap taiyar hain?</p>
-    <button class="btn" onclick="nextLayer(2)">Start Journey 🚀</button>
+    <button class="btn" onclick="startJourney()">Start Journey 🚀</button>
   </div>
 
   <!-- LAYER 2 -->
@@ -300,7 +325,7 @@
     <h2 style="font-size: 2.2rem;">Forever Yours 🫂💗</h2>
     <img src="p11.jpeg" alt="Forever" class="media-element">
     <p style="color: #ffeaa7; font-weight: 600;">
-      "Ab chahe jo ho jaye, hum hamesha aapke saath hain... ✨<br>Thank you for being in my life, Purnima! ❤️"
+      "Ab chahe jo ho jaye, hum hamesha aapke saath hain... ✨<br>Thank you for being in my life, Purnima! ❤️️"
     </p>
     <button class="btn glow-btn" onclick="nextLayer(12)">Some lines for you... 💌✨</button>
   </div>
@@ -319,6 +344,28 @@
 
 <script>
   let flowerRainInterval = null;
+  const bgMusic = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('music-btn');
+
+  function startJourney() {
+    // Play background music on first user click
+    bgMusic.play().then(() => {
+      musicBtn.innerText = '🎵';
+    }).catch(err => {
+      console.log('Audio playback prevented:', err);
+    });
+    nextLayer(2);
+  }
+
+  function toggleMusic() {
+    if (bgMusic.paused) {
+      bgMusic.play();
+      musicBtn.innerText = '🎵';
+    } else {
+      bgMusic.pause();
+      musicBtn.innerText = '🔇';
+    }
+  }
 
   function nextLayer(layerNum) {
     document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
